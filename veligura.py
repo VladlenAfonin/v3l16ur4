@@ -1,28 +1,62 @@
-from libvelig import *
+#! python3
+
+import argparse
 import numpy as np
 
-# 1
+from libvelig import *
 
-# function = np.array([0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1])
 
-# print("Zhe_galking: ", np.linalg.solve(coefficients_matrix, function) % 2)
-# print("Real       : ", np.linalg.solve(coefficients_matrix, function))
+def main() -> None:
+    '''
+    Entry point.
 
-# 2
+    @returns - nothing.
+    '''
 
-             ##0  1  2  3  4  12 13 14 23 24 34 123 124 134 234 1234
-#a = np.array([0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0,  0,  0,  1,  0])
+    parser = argparse.ArgumentParser(description="Do the FOCKING homework!")
 
-# print("Fourier:  ", hadamard(16).dot(f))
-# print("Hadamard: ", hadamard(16).dot((-1) ** f))
+    parser.add_argument("-t", "--task", metavar="number", type=int, nargs=1, required=True)
+    parser.add_argument("-a", "--args", metavar="arg", type=str, nargs="+", required=True)
 
-# 3
+    args = parser.parse_args()
 
-# p_ksi = np.array([0.37, 0.02, 0.21, 0.40])
-# p_eta = np.array([0.17, 0.23, 0.33, 0.27])
+    try:
+        if (task_number := args.task[0]) == 1:
+            function = np.array(eval(args.args[0]))
 
-# print(E_inv.dot(phi_ksi_plus_eta))
+            zhe_galkin_coefficients, real_coefficients = task_1.solve(function)
+            print("Zhe_galking: ", zhe_galkin_coefficients)
+            print("Real       : ", real_coefficients)
 
-# 4
+        elif task_number == 2:
+            zhe_galkin_coefficients = np.array(eval(args.args[0]))
 
-# p_ksi = np.array([0.45, 0.34, 0.21])
+            fourier_coefficients, hadamard_coefficients = task_2.solve(zhe_galkin_coefficients)
+
+            print("Fourier:  ", fourier_coefficients)
+            print("Hadamard: ", hadamard_coefficients)
+
+        elif task_number == 3:
+            p_ksi = np.array(eval(args.args[0]))
+            p_eta = np.array(eval(args.args[1]))
+
+            distribution = task_3.solve(p_ksi, p_eta)
+
+            print("Distribution: ", distribution)
+
+        elif task_number == 4:
+            p_ksi = np.array(eval(args.args[0]))
+            eps = eval(args.args[1])
+
+            n = task_4.solve(p_ksi, eps)
+
+            print(f"{n = }")
+
+        else:
+            raise ValueError()
+    except Exception:
+        print("You can't even pass the arguments correctly, can you?")
+
+
+if __name__ == "__main__":
+    main()

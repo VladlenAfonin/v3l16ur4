@@ -3,7 +3,7 @@ import numpy as np
 from scipy.linalg import hadamard
 from typing import Tuple
 
-from common import coefficients_matrix
+from libvelig.common import coefficients_matrix
 
 
 def solve(zhe_galkin_coefficients: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
@@ -21,4 +21,4 @@ def solve(zhe_galkin_coefficients: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
     fourier_coefficients = H.dot(function)
     hadamard_coefficients = H.dot((-1) ** function)
 
-    return (fourier_coefficients, hadamard_coefficients)
+    return fourier_coefficients, hadamard_coefficients

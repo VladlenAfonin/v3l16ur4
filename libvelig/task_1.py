@@ -2,7 +2,7 @@ import numpy as np
 
 from typing import Tuple
 
-from common import coefficients_matrix
+from libvelig.common import coefficients_matrix
 
 
 def solve(function: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
@@ -16,4 +16,4 @@ def solve(function: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
     real_coefficients = np.linalg.solve(coefficients_matrix, function)
     zhe_galkin_coefficients = real_coefficients % 2
 
-    return (zhe_galkin_coefficients, real_coefficients)
+    return zhe_galkin_coefficients, real_coefficients

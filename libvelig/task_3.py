@@ -26,4 +26,4 @@ def solve(p_ksi: np.ndarray, p_eta: np.ndarray) -> np.ndarray:
 
     E_inv = 1.0 / n * np.conjugate(E)
 
-    return E_inv.dot(phi_ksi * phi_eta)
+    return E_inv.dot(phi_ksi * phi_eta).real

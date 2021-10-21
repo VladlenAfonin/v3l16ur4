@@ -1,6 +1,6 @@
 import numpy as np
 
-from common import generate_e_matrix
+from libvelig.common import generate_e_matrix
 
 
 def solve(p: np.ndarray, eps: float) -> int:
