@@ -1,9 +1,6 @@
 import numpy as np
 
-function = np.array([0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1])
-
-equation_system = np.array(
-    [
+coefficients_matrix = np.array([
         #0  1  2  3  4  12 13 14 23 24 34 123 124 134 234 1234
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0],
         [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0],
@@ -21,7 +18,20 @@ equation_system = np.array(
         [1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0,  1,  0,  0,  0],
         [1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1,  0,  0,  0,  0],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  1,  1,  1,  1],
-    ]
-)
+])
 
-print(np.linalg.solve(equation_system, function))
+
+def generate_e_matrix(n: int) -> np.ndarray:
+    '''
+    Generates E matrix with property phi_ksi = E * p_ksi.
+
+    @param n - size.
+    @returns - E matrix.
+    '''
+    
+    x = np.r_[0:n - 1:n * 1j]
+    y = np.r_[0:n - 1:n * 1j]
+
+    X, Y = np.meshgrid(x, y)
+
+    return np.exp(2j * np.pi * X * Y / n)
