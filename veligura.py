@@ -54,8 +54,9 @@ def main() -> None:
 
         else:
             raise ValueError()
-    except Exception:
-        print("You can't even pass the arguments correctly, can you?")
+    except Exception as e:
+        print("You can't even pass the arguments correctly, can you? Go read the fucking manuals. Here are the errors:")
+        print(e)
 
 
 if __name__ == "__main__":
